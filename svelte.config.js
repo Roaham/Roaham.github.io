@@ -1,17 +1,29 @@
-import adapter from '@sveltejs/adapter-auto';
+import adapter from '@sveltejs/adapter-static'; // 1. Cambiamos auto por static
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	kit: {
-		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
-		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
-		adapter: adapter()
-	},
-	vitePlugin: {
-		dynamicCompileOptions: ({ filename }) =>
-			filename.includes('node_modules') ? undefined : { runes: true }
-	}
+    preprocess: vitePreprocess(), // Preprocesador necesario para CSS/TS
+
+    kit: {
+        adapter: adapter({
+            // 2. Configuramos la salida para GitHub Pages
+            pages: 'build',
+            assets: 'build',
+            fallback: '404.html', // Necesario para que las rutas funcionen al recargar
+            precompress: false,
+			strict: true
+        }),
+        paths: {
+            // Si tu repo se llama exactamente "Roaham.github.io", deja esto vacío.
+            // Si el repo tuviera otro nombre, iría aquí: '/nombre-repo'
+            base: '', 
+        }
+    },
+    vitePlugin: {
+        dynamicCompileOptions: ({ filename }) =>
+            filename.includes('node_modules') ? undefined : { runes: true }
+    }
 };
 
 export default config;

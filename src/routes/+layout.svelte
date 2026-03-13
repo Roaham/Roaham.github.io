@@ -1,7 +1,8 @@
 <script>
   import "../app.css";
+
   
-  // En Svelte 5, los componentes usan $props()
+  // Recibimos 'children' (las páginas) como una propiedad
   let { children } = $props();
 </script>
 

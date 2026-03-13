@@ -1,5 +1,4 @@
 <script>
-  // Aquí van los datos de la página
   let titulo = "Bienvenido a mi Web";
 </script>
 
