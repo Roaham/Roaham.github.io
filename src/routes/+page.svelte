@@ -1,14 +1,7 @@
 <script>
-  import "../app.css";
-  
-  // En Svelte 5, los componentes usan $props()
-  let { children } = $props();
+  // Aquí van los datos de la página
+  let titulo = "Bienvenido a mi Web";
 </script>
 
-<div class="main-content">
-  <main class="content">
-    {#if children}
-      {@render children()}
-    {/if}
-  </main>
-</div>
+<h1>{titulo}</h1>
+<p>Este es el contenido de la página de inicio.</p>
